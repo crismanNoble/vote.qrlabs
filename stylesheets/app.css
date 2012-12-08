@@ -1,29 +1,9 @@
-/* Artfully masterminded by ZURB  */
-
-/* -------------------------------------------------- 
-   Table of Contents
------------------------------------------------------
-:: Shared Styles
-:: Page Name 1
-:: Page Name 2
-*/
-
-
-/* -----------------------------------------
-   Shared Styles
------------------------------------------ */
-
-
-
-/* -----------------------------------------
-   Page Name 1
------------------------------------------ */
-
-
-
-
-/* -----------------------------------------
-   Page Name 2
------------------------------------------ */
-
-
+.thingLink {
+	background: #fff;
+	margin-top: -150px;
+	margin-left: 97px;
+	border: 2px solid black;
+	padding: 5px 10px;
+	border-radius: 15px;
+	position: absolute;
+}

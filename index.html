@@ -5,7 +5,7 @@
 
   <meta name="viewport" content="width=device-width" />
 
-  <title>Welcome to Foundation</title>
+  <title>Vote | QR Labs</title>
   
   <!-- Included CSS Files (Uncompressed) -->
   <!--
@@ -57,11 +57,15 @@
     </div>
     <div class="four columns">
       <h3><span id="thing1Name">Thing 1</span></h3>
-      <img src="" id="thing1Output" class="genQR">
+      <img src="http://placehold.it/400x400&text=Enter+Thing1+Title" id="thing1Output" class="genQR">
+      <a href="#" id="thing1Link" class="thingLink"></a>
     </div>
     <div class="four columns">
       <h3><span id="thing2Name">Thing 2</span></h3>
-      <img src="" id="thing2Output" class="genQR">
+      <img src="http://placehold.it/400x400&text=Enter+Thing2+Title"  id="thing2Output" class="genQR">
+     
+      <a href="#" id="thing2Link" class="thingLink"></a>
+      
     </div>
   </div>
   
@@ -76,10 +80,10 @@
   <script>
   $(document).ready(function() {
 
-    generateQR('1');
-    generateQR('2');
 
     $('#color1, #color2').val('000000');
+
+    $('.thingLink').hide();
 
 
     $('#thing1').keyup(function(){
@@ -108,9 +112,14 @@
     color = $(color).val();
 
     var url = 'http://crisnoble.com/qrlabs/nodes/thingVote.php?thing=' + thing;
-    url=encodeURIComponent(url);
+    var urlEncoded=encodeURIComponent(url);
 
-    var kaywa_src = 'http://qrcode.kaywa.com/img.php?b='+color+'&w=FFFFFF&s=SIZE&t=p&d='+url;
+    var kaywa_src = 'http://qrcode.kaywa.com/img.php?b='+color+'&w=FFFFFF&s=SIZE&t=p&d='+urlEncoded;
+
+    var link = '#thing' + who + 'Link';
+    $(link).show();
+    $(link).text('Vote Here');
+    $(link).attr('href',url);
 
     $('#thing' + who + 'Output').attr('src',kaywa_src);
 
@@ -119,6 +128,7 @@
   function generateQRTitle(who) {
     var title = '#thing' + who + 'Name';
     var thing = '#thing' + who;
+
     thing = $(thing).val();
 
     $(title).text(thing);
