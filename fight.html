@@ -88,8 +88,7 @@
   $(document).ready(function() {
     determineFighters();
 
-    var interval = setInterval(determineCount(1), 3000);
-    var interval = setInterval(determineCount(2), 3000);
+    intervals = setInterval(determineCounts, 3000);
 
     $('#color1, #color2').val('000000');
 
@@ -213,6 +212,11 @@
     $('#fighter2').addClass('four');
     $('#fighter2').removeClass('five');
     $('.thingLink').removeClass('thingLink2');
+  }
+
+  function determineCounts(){
+    determineCount(1);
+    determineCount(2);
   }
 
   function determineCount(who){
