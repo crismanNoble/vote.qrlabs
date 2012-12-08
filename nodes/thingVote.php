@@ -10,12 +10,14 @@ $thing = $_GET["thing"];
 
 //grab info about the user?
 $user = $_SERVER['HTTP_USER_AGENT'];
+$user = $user.$_SERVER['REMOTE_ADDR'];
 
 //add vote into votes table
 $sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing', '$user');";
 //$sql = APW_DB_Prepare_String($sql);
-
+print $sql;
 $query = mysql_query($sql) or die(mysql_error());
+print $query;
 
 //APW_Close_DB($connection);
 
