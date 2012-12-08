@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Vote | QR Labs</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+  <div class="row">
+    <div class="twelve columns">
+      <h2>QR Votes</h2>
+      <p>Because why not?</p>
+      <hr />
+    </div>
+  </div>
+  <div class="row">
+    <div class="four columns" id="setup">
+      <h3 id="setupToggle">Setup</h3>
+      <div id="setupVars">
+      <label for="thing1">Thing 1:</label>
+      <input type="text" id="thing1"/>
+
+      <label for="color1">Color 1:</label>
+      <input type="text" id="color1"/>
+
+      <hr />
+
+      <label for="thing2">Thing 2:</label>
+      <input type="text" id="thing2"/>
+
+      <label for="color2">Color 2:</label>
+      <input type="text" id="color2"/>
+
+      <hr />
+      <a class="button" href="#">Save</a>
+      </div>
+
+    </div>
+    <div class="four columns" id="fighter1">
+      <center><h3><span id="thing1Name" class="heading">Thing 1</span></h3></center>
+      <img src="http://placehold.it/400x400&text=Enter+Thing1+Title" id="thing1Output" class="genQR">
+      <a href="#" id="thing1Link" class="thingLink"></a>
+      <center>
+        <span id="thing2Value" class="count">102</span>
+      </center>
+    </div>
+    <div class="four columns" id="fighter2">
+      <center><h3><span id="thing2Name" class="heading">Thing 2</span></h3></center>
+      <img src="http://placehold.it/400x400&text=Enter+Thing2+Title"  id="thing2Output" class="genQR">
+     
+      <a href="#" id="thing2Link" class="thingLink"></a>
+      <center>
+        <span id="thing2Value" class="count">54</span>
+      </center>
+      
+    </div>
+  </div>
+  
+  
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
+  <script>
+  $(document).ready(function() {
+    determineFighters();
+
+    $('#color1, #color2').val('000000');
+
+    $('#thing1').keyup(function(){
+      generateQR('1');
+      generateQRTitle('1');
+    });
+    $('#color1').keyup(function(){
+      generateQR('1');
+    });
+
+    $('#thing2').keyup(function(){
+      generateQR('2');
+      generateQRTitle('2');
+    });
+    $('#color2').keyup(function(){
+      generateQR('2');
+    });
+
+    $('#setupToggle').click(function(){
+      if($(this).hasClass('small')){
+        showSetup();
+      } else {
+        hideSetup();
+      }
+    });
+
+  });
+
+  var fighter1 = false;
+  var fighter2 = false;
+
+  function generateQR(who) {
+    var thing= '#thing' + who;
+    thing = $(thing).val();
+
+    var color = '#color' + who;
+    color = $(color).val();
+
+    var url = 'http://crisnoble.com/qrlabs/nodes/thingVote.php?thing=' + thing;
+    var urlEncoded=encodeURIComponent(url);
+
+    var kaywa_src = 'http://qrcode.kaywa.com/img.php?b='+color+'&w=FFFFFF&s=SIZE&t=p&d='+urlEncoded;
+
+    var link = '#thing' + who + 'Link';
+    $(link).show();
+    $(link).text('Vote Here');
+    $(link).attr('href',url);
+
+    $('#thing' + who + 'Output').attr('src',kaywa_src);
+
+  }
+
+  function generateQRTitle(who) {
+    var title = '#thing' + who + 'Name';
+    var thing = '#thing' + who;
+
+    thing = $(thing).val();
+
+    $(title).text(thing);
+  }
+
+  function determineFighters(){
+
+    var hashString = document.location.hash;
+    if (!hashString){
+      prepareFight();
+    } else {
+      var fighterList = hashString.split('#')[1].split('&');
+
+      fighter1 = fighterList[0];
+      fighter2 = fighterList[1];
+
+      loadFight();
+    }
+  }
+
+  function loadFight(){
+
+    $('#thing1').val(fighter1);
+    $('#thing2').val(fighter2);
+
+    generateQRTitle(1);
+    generateQRTitle(2);
+
+    generateQR(1);
+    generateQR(2);
+
+    determineCount(1);
+    determineCount(2);
+
+    
+    hideSetup();
+
+  }
+
+  function prepareFight(){
+    $('.thingLink').hide();
+  }
+
+  function hideSetup(){
+    $('#setupVars').hide();
+    $('#setup').removeClass('four');
+    $('#setup').addClass('two');
+    $('#setupToggle').addClass('small');
+    $('#fighter1').addClass('five');
+    $('#fighter1').removeClass('four');
+    $('#fighter2').addClass('five');
+    $('#fighter2').removeClass('four');
+    $('.thingLink').addClass('thingLink2');
+  }
+
+  function showSetup(){
+    $('#setupVars').show();
+    $('#setup').removeClass('two');
+    $('#setup').addClass('four');
+    $('#setupToggle').removeClass('small');
+    $('#fighter1').addClass('four');
+    $('#fighter1').removeClass('five');
+    $('#fighter2').addClass('four');
+    $('#fighter2').removeClass('five');
+    $('.thingLink').removeClass('thingLink2');
+  }
+
+  function determineCount(who){
+    var which = '#thing' + who;
+    var query = which + 'Name';
+    query = $(query).text();
+    var queryURL = 'nodes/voteCount.php?thing='+query
+    console.log(queryURL);
+    $(which + 'Value').load(queryURL);
+  }
+
+
+  </script>
+  
+</body>
+</html>

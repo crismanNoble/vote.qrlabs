@@ -1,3 +1,6 @@
+img {
+	width: 100%;
+}
 .thingLink {
 	background: #fff;
 	margin-top: -150px;
@@ -6,4 +9,25 @@
 	padding: 5px 10px;
 	border-radius: 15px;
 	position: absolute;
+}
+
+.thingLink2 {
+	margin-top: -187px;
+	margin-left: 141px;
+}
+
+.small {
+	font-size: 12px;
+}
+
+#setupToggle {
+	cursor: pointer;
+}
+
+.count {
+	font-size: 90px;
+}
+
+.heading {
+	font-size: 60px;
 }
