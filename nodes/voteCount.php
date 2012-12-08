@@ -6,7 +6,7 @@ include_once 'connections.php';
 $thing = $_GET["thing"];
 
 //determine number of votes for the things.
-$result = mysql_query("SELECT * FROM `votes` WHERE `thing` = '$thing1'") or die(mysql_error());
+$result = mysql_query("SELECT * FROM `votes` WHERE `thing` = '$thing'") or die(mysql_error());
 
 $count = mysql_numrows($result);
 
