@@ -2,7 +2,6 @@
 
 function APW_Close_DB($connection)
 {
-    include "Configuration.php";
     if(isset($connection))
     {
         mysql_close($connection);
@@ -14,7 +13,7 @@ function APW_Run_SQL_Statement($inSQL)
     //Take in the SQL statement and execute it against the database.  DOES NOT return anything because this function is oriented around non-SELECT statements.
     $db_result = mysql_query($inSQL) or die(mysql_error() . "Bad Sql = $inSQL");
 }
-[12/8/12 3:34:30 PM] Michael Ogren: 
+
 function APW_DB_Prepare_String($inString)
 {
     //Take in a string and double up the single quote characters so it enters the database properly
