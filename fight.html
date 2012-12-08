@@ -88,6 +88,9 @@
   $(document).ready(function() {
     determineFighters();
 
+    var interval = setInterval(determineCount(1), 3000);
+    var interval = setInterval(determineCount(2), 3000);
+
     $('#color1, #color2').val('000000');
 
     $('#thing1').keyup(function(){
@@ -118,6 +121,8 @@
 
   var fighter1 = false;
   var fighter2 = false;
+
+
 
   function generateQR(who) {
     var thing= '#thing' + who;
