@@ -1,27 +1,11 @@
 <?php
-function APW_Prepare_DB()
-{
-    //Opens the database and gets it ready for use
-    //Returns a mySQL database object
-    
-    //Get the required configuration variables
-    include "Configuration.php";
-    
-    $conn = mysql_connect($db_host, $db_user, $db_password) or die(mysql_error());
-    mysql_select_db($db_name, $conn) or die(mysql_error());
-    
-    //will this work for us?
-    //mysql_query("SET NAMES utf8 COLLATE 'utf8_unicode_ci'");
-    
-    return $conn;
-}
 
-function APW_Close_DB_i($connection)
+function APW_Close_DB($connection)
 {
     include "Configuration.php";
     if(isset($connection))
     {
-        mysqli_close($connection);
+        mysql_close($connection);
     }
 }
 
