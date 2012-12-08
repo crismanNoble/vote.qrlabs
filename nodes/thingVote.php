@@ -2,7 +2,7 @@
 //connect to database
 //include_once 'APW_functions.php';
 include_once 'connections.php';
-$connection = APW_Prepare_DB();
+//$connection = APW_Prepare_DB();
 
 //Grab thing
 $thing = $_GET["thing"];
