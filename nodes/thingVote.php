@@ -17,7 +17,7 @@ $sql = APW_DB_Prepare_String($sql);
 
 $query = mysql_query($sql) or die(mysql_error());
 
-APW_Close_DB($connection);
+//APW_Close_DB($connection);
 
 //change count in things table for given thing id
 
