@@ -10,7 +10,6 @@ $result = mysql_query("SELECT * FROM `votes` WHERE `thing` = '$thing'") or die(m
 
 $count = mysql_numrows($result);
 
-print $thing;
 print $count;
 
 ?>
