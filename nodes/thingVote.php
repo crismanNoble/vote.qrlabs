@@ -1,6 +1,8 @@
 <?php
 //connect to database
-include 'connections.php';
+include_once 'APW_functions.php';
+include_once 'connections.php';
+$connection = APW_Prepare_DB();
 
 //Grab thing
 $thing = $_GET["thing"];
@@ -10,10 +12,12 @@ $thing = $_GET["thing"];
 $user = $_SERVER['HTTP_USER_AGENT'];
 
 //add vote into votes table
-$sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`id`, `thing`, `time`, `user`) VALUES (NULL, ".$thing." , CURRENT_TIMESTAMP, ".$user.");";
-print $sql;
+$sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing', '$user');";
+$sql = APW_DB_Prepare_String($sql);
 
 $query = mysql_query($sql) or die(mysql_error());
+
+APW_Close_DB_i($connection);
 
 //change count in things table for given thing id
 
