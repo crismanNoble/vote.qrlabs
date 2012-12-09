@@ -164,7 +164,7 @@ $sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing
     var color = '#color' + who;
     color = $(color).val();
 
-    var thisURL = window.location.href;
+    var thisURL = window.location.href.split('?')[0];
     var url = thisURL + '?thing=' + thing;
     var urlEncoded=encodeURIComponent(url);
 
