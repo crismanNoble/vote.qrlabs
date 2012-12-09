@@ -165,7 +165,7 @@ $sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing
     color = $(color).val();
 
     var thisURL = window.location.href;
-    var url = thisURL'?thing=' + thing;
+    var url = thisURL + '?thing=' + thing;
     var urlEncoded=encodeURIComponent(url);
 
     var kaywa_src = 'http://qrcode.kaywa.com/img.php?b='+color+'&w=FFFFFF&s=SIZE&t=p&d='+urlEncoded;
@@ -197,7 +197,7 @@ $sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing
       var fighterList = hashString.split('#')[1].split('&');
 
       fighter1 = decodeURIComponent(fighterList[0]);
-      fighter2 = decodeURIComponent(fighterList[1]);
+      fighter2 = decodeURIComponent(fighterList[1].split('?')[0]);
 
       loadFight();
     }
