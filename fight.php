@@ -15,6 +15,8 @@ $user = $user.$_SERVER['REMOTE_ADDR'];
 //add vote into votes table
 $sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing', '$user');";
 
+mysql_query($sql);
+
 ?>
 
 <!DOCTYPE html>
