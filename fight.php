@@ -7,7 +7,13 @@ mysql_select_db("angelaj2_qrvotes") or die(mysql_error());
 
 //Grab thing
 $thing = $_GET["thing"];
-$thing = explode("#",$thing)[0];
+$thing = explode("#",$thing);
+
+if(strlen($thing[0]) > 0){
+  $thing = $thing[0];
+} else {
+  $thing = $_GET["thing"];
+};
 //grab thing direction
 
 //grab info about the user?
