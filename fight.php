@@ -1,3 +1,22 @@
+<?php
+//connect to database
+//include_once 'APW_functions.php';
+include_once 'connections.php';
+//$connection = APW_Prepare_DB();
+
+//Grab thing
+$thing = $_GET["thing"];
+//grab thing direction
+
+//grab info about the user?
+$user = $_SERVER['HTTP_USER_AGENT'];
+$user = $user.$_SERVER['REMOTE_ADDR'];
+
+//add vote into votes table
+$sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing', '$user');";
+
+?>
+
 <!DOCTYPE html>
 
 <head>
