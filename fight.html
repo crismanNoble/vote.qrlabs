@@ -270,7 +270,12 @@
 
   }
 
+  function removeChart(){
+    $('#pieWrap').find('svg').remove();
+  }
+
   function drawChart(){
+    removeChart();
     var score1 = parseInt($('#thing1Value').text());
     var score2 = parseInt($('#thing1Value').text());
 
