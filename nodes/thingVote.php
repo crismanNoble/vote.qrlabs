@@ -15,9 +15,10 @@ $user = $user.$_SERVER['REMOTE_ADDR'];
 //add vote into votes table
 $sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing', '$user');";
 //$sql = APW_DB_Prepare_String($sql);
-print $sql;
 $query = mysql_query($sql) or die(mysql_error());
-print $query;
+
+$result = mysql_query("SELECT * FROM `votes` WHERE `thing` = '$thing'") or die(mysql_error());
+$count = mysql_numrows($result);
 
 //APW_Close_DB($connection);
 
@@ -25,9 +26,8 @@ print $query;
 
 //return thank you message
 print $thing;
-print '<br/>';
-print $user;
-print '<br/>';
-print $query;
+print ' has ';
+print $count;
+print ' total votes share this link to rack up the votes.';
 
 ?>
