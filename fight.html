@@ -95,6 +95,7 @@
     $('#thing1').keyup(function(){
       generateQR('1');
       generateQRTitle('1');
+      updateURL();
     });
     $('#color1').keyup(function(){
       generateQR('1');
@@ -103,6 +104,7 @@
     $('#thing2').keyup(function(){
       generateQR('2');
       generateQRTitle('2');
+      updateURL();
     });
     $('#color2').keyup(function(){
       generateQR('2');
@@ -165,8 +167,8 @@
     } else {
       var fighterList = hashString.split('#')[1].split('&');
 
-      fighter1 = fighterList[0];
-      fighter2 = fighterList[1];
+      fighter1 = decodeURIComponent(fighterList[0]);
+      fighter2 = decodeURIComponent(fighterList[1]);
 
       loadFight();
     }
@@ -245,8 +247,7 @@
 
     var newURL = baseURL +'#' + query1 + '&' + query2;
 
-    console.log(newURL);
-    window.location.href = newURL;
+    $('#save').attr('href', newURL);
 
   }
 
