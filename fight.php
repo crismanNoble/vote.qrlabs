@@ -48,7 +48,7 @@ $sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing
   <div class="row">
     <div class="twelve columns">
       <h2>QR Votes</h2>
-      <p>Your Vote:&nbsp;<?php $thing ?></p>
+      <p>Your Vote:&nbsp;<?php print $thing; ?></p>
       <hr />
     </div>
   </div>
