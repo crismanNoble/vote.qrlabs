@@ -51,7 +51,7 @@ $query = mysql_query($sql) or die(mysql_error());
   <div class="row">
     <div class="twelve columns">
       <h2>QR Votes</h2>
-      <p>Your Vote:&nbsp;<?php print $thing; print $query; ?></p>
+      <p>Your Vote:&nbsp;<?php print $thing; ?></p>
       <hr />
     </div>
   </div>
@@ -202,7 +202,7 @@ $query = mysql_query($sql) or die(mysql_error());
       var fighterList = hashString.split('#')[1].split('&');
 
       fighter1 = decodeURIComponent(fighterList[0]);
-      fighter2 = decodeURIComponent(fighterList[1].split('?')[0]);
+      fighter2 = decodeURIComponent(fighterList[1]);
 
       loadFight();
     }
