@@ -1,7 +1,8 @@
 <?php
 //connect to database
 //include_once 'APW_functions.php';
-include_once 'connections.php';
+mysql_connect("localhost","angelaj2_qrvoter","katPoop") or die(mysql_error());
+mysql_select_db("angelaj2_qrvotes") or die(mysql_error());
 //$connection = APW_Prepare_DB();
 
 //Grab thing
