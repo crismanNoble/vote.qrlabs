@@ -74,19 +74,29 @@
       </center>
       
     </div>
+
+  </div>
+  <div class="row">
+    <center>
+    <div class="eight columns offset-by-four" style="background:grey" id="pieWrap">
+      
+    </div>
+  </center>
   </div>
   
   
   <!-- Included JS Files (Compressed) -->
   <script src="javascripts/jquery.js"></script>
   <script src="javascripts/foundation.min.js"></script>
-  
+  <script src="http://mbostock.github.com/d3/d3.js"></script>
+
   <!-- Initialize JS Plugins -->
   <script src="javascripts/app.js"></script>
 
   <script>
   $(document).ready(function() {
     determineFighters();
+    drawChart();
 
     intervals = setInterval(determineCounts, 3000);
 
@@ -206,6 +216,10 @@
     $('#fighter2').addClass('five');
     $('#fighter2').removeClass('four');
     $('.thingLink').addClass('thingLink2');
+    $('#pieWrap').removeClass('offset-by-four');
+    $('#pieWrap').addClass('offset-by-two');
+    $('#pieWrap').addClass('ten');
+    $('#pieWrap').removeClass('eight');
   }
 
   function showSetup(){
@@ -218,6 +232,10 @@
     $('#fighter2').addClass('four');
     $('#fighter2').removeClass('five');
     $('.thingLink').removeClass('thingLink2');
+    $('#pieWrap').addClass('offset-by-four');
+    $('#pieWrap').removeClass('offset-by-two');
+    $('#pieWrap').removeClass('ten');
+    $('#pieWrap').addClass('eight');
   }
 
   function determineCounts(){
@@ -232,6 +250,7 @@
     var queryURL = 'nodes/voteCount.php?thing='+query
 
     $(which + 'Value').load(queryURL);
+    drawChart();
   }
 
   function updateURL(){
@@ -251,8 +270,57 @@
 
   }
 
+  function drawChart(){
+    var score1 = parseInt($('#thing1Value').text());
+    var score2 = parseInt($('#thing1Value').text());
+
+    if (score1 == 0 && score2 == 0) {
+      return false;
+    }
+
+    var w = 300, h = 300, r = 100, color = d3.scale.category20c();
+
+    data = [{"label":"one", "value":score1},
+            {"label":"two", "value":score2}
+    ];
+
+    var vis = d3.select('#pieWrap')
+      .append("svg:svg")
+      .data([data])
+      .attr("width", w)
+      .attr("height",h)
+      .append("svg:g")
+      .attr("transform", "translate(" + r + "," + r + ")");
+
+    var arc = d3.svg.arc().outerRadius(r);
+    var pie = d3.layout.pie().value(function(d){return d.value;});
+
+    var arcs = vis.selectAll("g.slice")
+      .data(pie)
+      .enter()
+        .append("svg:g")
+        .attr("class", "slice");
+
+    arcs.append("svg:path")
+      .attr("fill", function(d, i){ return color(i);})
+      .attr("d", arc);
+
+    arcs.append("svg:text")
+      .attr("transform", function(d) {
+        d.innerRadius = 0;
+        d.outerRadius = r;
+        return "translate(" + arc.centroid(d) +")";
+      })
+      .attr("text-anchor","middle")
+      .text(function(d, i) {
+        return data[i].label; });
+
+  };
 
   </script>
+  <script>
+
+  
   
 </body>
 </html>
