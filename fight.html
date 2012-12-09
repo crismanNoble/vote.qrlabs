@@ -52,7 +52,7 @@
       <input type="text" id="color2"/>
 
       <hr />
-      <a class="button" href="#">Save</a>
+      <a class="button" href="#" id="save">Save</a>
       </div>
 
     </div>
@@ -61,7 +61,7 @@
       <img src="http://placehold.it/400x400&text=Enter+Thing1+Title" id="thing1Output" class="genQR">
       <a href="#" id="thing1Link" class="thingLink"></a>
       <center>
-        <span id="thing1Value" class="count">102</span>
+        <span id="thing1Value" class="count"></span>
       </center>
     </div>
     <div class="four columns" id="fighter2">
@@ -70,7 +70,7 @@
      
       <a href="#" id="thing2Link" class="thingLink"></a>
       <center>
-        <span id="thing2Value" class="count">54</span>
+        <span id="thing2Value" class="count"></span>
       </center>
       
     </div>
@@ -114,6 +114,10 @@
       } else {
         hideSetup();
       }
+    });
+
+    $('#save').click(function(){
+      updateURL();
     });
 
   });
@@ -224,8 +228,26 @@
     var query = which + 'Name';
     query = $(query).text();
     var queryURL = 'nodes/voteCount.php?thing='+query
-    console.log(queryURL);
+
     $(which + 'Value').load(queryURL);
+  }
+
+  function updateURL(){
+    var which1 = '#thing' + 1;
+    var query1 = which1 + 'Name';
+    query1 = encodeURIComponent($(query1).text());
+
+    var which2 = '#thing' + 2;
+    var query2 = which2 + 'Name';
+    query2 = encodeURIComponent($(query2).text());
+
+    var baseURL = window.location.href.split('#')[0];
+
+    var newURL = baseURL +'#' + query1 + '&' + query2;
+
+    console.log(newURL);
+    window.location.href = newURL;
+
   }
 
 

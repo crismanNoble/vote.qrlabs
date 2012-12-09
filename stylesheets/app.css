@@ -11,6 +11,10 @@ img {
 	position: absolute;
 }
 
+.columns {
+	position: relative;
+}
+
 .thingLink2 {
 	margin-top: -187px;
 	margin-left: 141px;
