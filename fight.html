@@ -78,7 +78,7 @@
   </div>
   <div class="row">
     <center>
-    <div class="eight columns offset-by-four" style="background:grey" id="pieWrap">
+    <div class="eight columns offset-by-four" style="margin-top:20px;" id="pieWrap">
       
     </div>
   </center>
@@ -98,7 +98,7 @@
     determineFighters();
     drawChart();
 
-    intervals = setInterval(determineCounts, 3000);
+    intervals = setInterval(determineCounts, 1000);
 
     $('#color1, #color2').val('000000');
 
@@ -278,6 +278,8 @@
     removeChart();
     var score1 = parseInt($('#thing1Value').text());
     var score2 = parseInt($('#thing1Value').text());
+    var title1 = $('#thing1Name').text();
+    var title2 = $('#thing2Name').text();
 
     if (score1 == 0 && score2 == 0) {
       return false;
@@ -285,8 +287,8 @@
 
     var w = 300, h = 300, r = 100, color = d3.scale.category20c();
 
-    data = [{"label":"one", "value":score1},
-            {"label":"two", "value":score2}
+    data = [{"label":title1, "value":score1},
+            {"label":title2, "value":score2}
     ];
 
     var vis = d3.select('#pieWrap')
