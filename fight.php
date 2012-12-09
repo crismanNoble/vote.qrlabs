@@ -164,8 +164,10 @@ $sql = "INSERT INTO `angelaj2_qrvotes`.`votes` (`thing`, `user`) VALUES ('$thing
     var color = '#color' + who;
     color = $(color).val();
 
-    var thisURL = window.location.href.split('?')[0];
-    var url = thisURL + '?thing=' + thing;
+    var baseURL = window.location.href.split('?')[0];
+    var afterURL = window.location.href.split('?')[1].split('#')[1];
+
+    var url = baseURL + '?thing=' + thing + '#' + afterURL;
     var urlEncoded=encodeURIComponent(url);
 
     var kaywa_src = 'http://qrcode.kaywa.com/img.php?b='+color+'&w=FFFFFF&s=SIZE&t=p&d='+urlEncoded;
